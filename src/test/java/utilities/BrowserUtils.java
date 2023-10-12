@@ -1,6 +1,7 @@
 package utilities;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,11 +15,11 @@ import java.util.Set;
 
 public class BrowserUtils {
 
-    public static void sleep(int second){
-        second *=1000;
+    public static void sleep(int second) {
+        second *= 1000;
         try {
             Thread.sleep(second);
-        }catch (InterruptedException e ) {
+        } catch (InterruptedException e) {
 
         }
     }
@@ -30,7 +31,7 @@ public class BrowserUtils {
         - If condition matches, will break loop.
     Arg3: expectedInTitle to be compared against actualTitle
      */
-    public static void switchWindowAndVerify(String expectedInUrl, String expectedInTitle){
+    public static void switchWindowAndVerify(String expectedInUrl, String expectedInTitle) {
 
         Set<String> allWindowsHandles = Driver.getDriver().getWindowHandles();
 
@@ -40,7 +41,7 @@ public class BrowserUtils {
 
             System.out.println("Current URL: " + Driver.getDriver().getCurrentUrl());
 
-            if (Driver.getDriver().getCurrentUrl().contains(expectedInUrl)){
+            if (Driver.getDriver().getCurrentUrl().contains(expectedInUrl)) {
                 break;
             }
         }
@@ -53,7 +54,7 @@ public class BrowserUtils {
     /*
     This method accepts a String "expectedTitle" and Asserts if it is true
      */
-    public static void verifyTitle(String expectedTitle){
+    public static void verifyTitle(String expectedTitle) {
 
         Assert.assertEquals(Driver.getDriver().getTitle(), expectedTitle);
 
@@ -63,15 +64,15 @@ public class BrowserUtils {
      * This method will accept a String as expected value and verify actual URL CONTAINS the value.
      * @param expectedInURL
      */
-    public static void verifyURLContains(String expectedInURL){
+    public static void verifyURLContains(String expectedInURL) {
         Assert.assertTrue(Driver.getDriver().getCurrentUrl().contains(expectedInURL));
     }
 
-    public static List<String> dropdownOptionsAsString(WebElement dropdownElement){
-        Select select=new Select(dropdownElement);
-        List<WebElement>actualOptionsAsWebElement =select.getOptions();
+    public static List<String> dropdownOptionsAsString(WebElement dropdownElement) {
+        Select select = new Select(dropdownElement);
+        List<WebElement> actualOptionsAsWebElement = select.getOptions();
 
-        List<String>actualOptionAsString=new ArrayList<>();
+        List<String> actualOptionAsString = new ArrayList<>();
         for (WebElement each : actualOptionsAsWebElement) {
             actualOptionAsString.add(each.getText());
         }
@@ -79,10 +80,10 @@ public class BrowserUtils {
         return actualOptionAsString;
     }
 
-    public static void clickRadioButton(List<WebElement>radioButtons,String attributeValue){
+    public static void clickRadioButton(List<WebElement> radioButtons, String attributeValue) {
 
         for (WebElement each : radioButtons) {
-            if(each.getAttribute("value").equalsIgnoreCase(attributeValue)){
+            if (each.getAttribute("value").equalsIgnoreCase(attributeValue)) {
                 each.click();
             }
         }
@@ -117,9 +118,12 @@ public class BrowserUtils {
         }
     }
 
-    public static void waitForInvisibilityOf(WebElement webElement){
+    public static void waitForInvisibilityOf(WebElement webElement) {
         // Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        WebDriverWait wait=new WebDriverWait(Driver.getDriver(),Duration.ofSeconds(2));
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(2));
         wait.until(ExpectedConditions.invisibilityOf(webElement));
     }
+
+
+
 }

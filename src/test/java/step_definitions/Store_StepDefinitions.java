@@ -4,21 +4,16 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import pages.About;
+import pages.Store;
 import utilities.BrowserUtils;
 import utilities.ConfigurationReader;
 import utilities.Driver;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class About_StepDefinitions extends About {
+public class Store_StepDefinitions extends Store {
 
 
-    About about = new About();
+    Store store = new Store();
     JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
 
 
@@ -27,31 +22,45 @@ public class About_StepDefinitions extends About {
         Driver.getDriver().get(ConfigurationReader.getProperty("env"));
     }
 
-    @Given("user clicks the about us button")
-    public void user_clicks_the_about_us_button() {
+    @And("user clicks the store locator button")
+    public void userClicksTheStoreLocatorButton() {
+
         cookies.click();
         BrowserUtils.sleep(2);
-        aboutButton.click();
+
+        ad.click();
+        BrowserUtils.sleep(2);
+
+        LocatorButton.click();
+
 
     }
 
 
-    @And("user clicks the about RSA button")
-    public void userClicksTheAboutRSAButton() {
-        BrowserUtils.sleep(3);
-        AboutRSA.click();
+    @And("user enters his location into the search field")
+    public void userEntersHisLocationIntoTheSearchField() {
+        BrowserUtils.sleep(2);
+        EnterLocation.sendKeys("London");
     }
+
+    @And("user select first option")
+    public void userSelectFirstOption() {
+     firstOption.click();
+
+    }
+
+
 
     @And("user scrolls down and up")
     public void userScrollsDownAndUp() {
 
-        for (int i = 0; i < 5; i++) {
-            BrowserUtils.sleep(1);
-            js.executeScript("window.scrollBy(0,750)");
+        for (int i = 0; i < 2; i++) {
+            BrowserUtils.sleep(2);
+            js.executeScript("window.scrollBy(0,600)");
         }
         BrowserUtils.sleep(2);
-        for (int i = 0; i <10; i++) {
-            js.executeScript("window.scrollBy(0,-1000)");
+        for (int i = 0; i <5; i++) {
+            js.executeScript("window.scrollBy(0,-600)");
         }
     }
 
@@ -64,10 +73,12 @@ public class About_StepDefinitions extends About {
 
     @Then("user should see the main page")
     public void userShouldSeeTheMainPage() {
-        String expectedTitle="Home | RSA Insurance";
+        String expectedTitle="MILWAUKEE® Power Tools UK Official Site | NOTHING BUT HEAVY DUTY | Milwaukee Tools UK";
         String actualTitle = Driver.getDriver().getTitle();
         System.out.println("actualTitle = " + actualTitle);
         Assert.assertEquals(expectedTitle, actualTitle);
     }
+
+
 }
 
