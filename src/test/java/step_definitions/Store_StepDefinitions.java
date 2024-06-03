@@ -28,6 +28,8 @@ public class Store_StepDefinitions extends Store {
         cookies.click();
         BrowserUtils.sleep(2);
 
+        BrowserUtils.sleep(2);
+
         ad.click();
         BrowserUtils.sleep(2);
 
@@ -60,7 +62,7 @@ public class Store_StepDefinitions extends Store {
         }
         BrowserUtils.sleep(2);
         for (int i = 0; i <5; i++) {
-            js.executeScript("window.scrollBy(0,-600)");
+            js.executeScript("window.scrollBy(0,-1000)");
         }
     }
 

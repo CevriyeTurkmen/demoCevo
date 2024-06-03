@@ -1,7 +1,6 @@
-Feature:
+Feature: Store Locator Functionality
   User Story:
   As a user, I should be able to see the locations in London
-
 
   Scenario: User should be able to see the London stores
     Given user is on the home page
